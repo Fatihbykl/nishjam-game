@@ -10,9 +10,10 @@ namespace Helper
     public class LevelEndSequence : MonoBehaviour
     {
         [Header("Cutscene Objects")]
+        public GameObject enemy;
         public CinemachineCamera endCam;
         public Transform standPoint;
-        public Image blackScreenPanel;
+        public CanvasGroup blackScreenPanel;
         public Material bodyDissolveMaterial;
         public Animator boxAnimator;
 
@@ -36,6 +37,7 @@ namespace Helper
 
         IEnumerator PlayEndCutscene(PlayerStateManager player)
         {
+            enemy.SetActive(false);
             player.enabled = false; 
         
             player._controller.enabled = false; 
@@ -75,9 +77,9 @@ namespace Helper
             
             yield return new WaitForSeconds(2f);
 
-            blackScreenPanel.DOFade(1.0f, fadeSpeed);
+            blackScreenPanel.DOFade(1f, 1f).SetEase(Ease.InOutQuad);
 
-            yield return new WaitForSeconds(fadeSpeed);
+            yield return new WaitForSeconds(1f);
 
             Debug.Log("Level Bitti!");
             // SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
