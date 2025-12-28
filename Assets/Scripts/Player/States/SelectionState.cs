@@ -15,8 +15,10 @@ namespace Player.States
             Cursor.visible = true;
             CameraFadeManager.Instance.TransitionToCamera(Ctx.selectionCam, OnCameraTransitionFinished);
             Ctx._animator.SetBool("Levitating", true);
-        }
         
+            AudioManager.instance.EnterSelectionMode();
+        }
+
         private void DeactivateParticles()
         {
             Ctx.headBloodParticle.SetActive(false);
@@ -105,6 +107,8 @@ namespace Player.States
             Cursor.visible = false;
             Ctx.selectionCanvas.SetActive(false);
             Ctx._animator.SetBool("Levitating", false);
+
+            AudioManager.instance.ExitSelectionMode();
         }
     }
 }

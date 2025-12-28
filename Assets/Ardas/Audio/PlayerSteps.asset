@@ -1,0 +1,71 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1233149941 &-3221312786241642176
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: FEETHmn-CONCRETE_AUDIOELK-Fs Concrete Shoes Pant Ruffles 13_AUDIOELK_AUDIOELK_{-3221312786241642176}
+  m_AudioClip: {fileID: 8300000, guid: fa29a90ae5c045a4491b93bca900b179, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1307931743 &6418180475301049370
+AudioRandomContainer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: PlayerSteps
+  m_Volume: 0
+  m_Pitch: 0
+  m_AutomaticTriggerTime: 0
+  m_LoopCount: 1
+  m_VolumeRandomizationRange: {x: 0, y: 15}
+  m_PitchRandomizationRange: {x: 0, y: 0}
+  m_AutomaticTriggerTimeRandomizationRange: {x: 0, y: 0}
+  m_LoopCountRandomizationRange: {x: 0, y: 0}
+  m_Elements:
+  - {fileID: 8295985861948612003}
+  - {fileID: 8204249546717208722}
+  - {fileID: 9153270705565722953}
+  - {fileID: -3221312786241642176}
+  m_AvoidRepeatingLast: 2
+  m_PlaybackMode: 2
+  m_TriggerMode: 1
+  m_AutomaticTriggerMode: 1
+  m_LoopMode: 0
+  m_VolumeRandomizationEnabled: 1
+  m_PitchRandomizationEnabled: 0
+  m_AutomaticTriggerTimeRandomizationEnabled: 0
+  m_LoopCountRandomizationEnabled: 0
+--- !u!1233149941 &8204249546717208722
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: FEETHmn-CONCRETE_AUDIOELK-Fs Concrete Shoes Pant Ruffles 11_AUDIOELK_AUDIOELK_{8204249546717208722}
+  m_AudioClip: {fileID: 8300000, guid: c3c66de2d36a4db49a174a05a8de7c4e, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &8295985861948612003
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: FEETHmn-CONCRETE_AUDIOELK-Fs Concrete Shoes Pant Ruffles 10_AUDIOELK_AUDIOELK_{8295985861948612003}
+  m_AudioClip: {fileID: 8300000, guid: b58679b02cfe92949bba1c3bae1175c5, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &9153270705565722953
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: FEETHmn-CONCRETE_AUDIOELK-Fs Concrete Shoes Pant Ruffles 12_AUDIOELK_AUDIOELK_{9153270705565722953}
+  m_AudioClip: {fileID: 8300000, guid: 561df57a5cb8fe64ca14e6dbbcedde9c, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
