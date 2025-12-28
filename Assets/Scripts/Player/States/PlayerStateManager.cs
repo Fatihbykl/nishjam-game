@@ -118,7 +118,7 @@ namespace Player.States
             armsState = new ArmsState(this);
             selectionState = new SelectionState(this);
 
-            SwitchState(legsState);
+            SwitchState(selectionState);
         }
 
         void Update()

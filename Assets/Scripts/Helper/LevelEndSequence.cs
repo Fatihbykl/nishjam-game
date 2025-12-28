@@ -3,6 +3,7 @@ using DG.Tweening;
 using Player.States;
 using Unity.Cinemachine;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace Helper
@@ -17,7 +18,8 @@ namespace Helper
         public Material bodyDissolveMaterial;
         public Animator boxAnimator;
 
-        [Header("Settings")]
+        [Header("Settings")] 
+        public string nextLevelName;
         public float dissolveSpeed = 2.0f;
         public float fadeSpeed = 1.5f;
 
@@ -42,7 +44,7 @@ namespace Helper
         
             player._controller.enabled = false; 
             
-            player._animator.SetBool("Levitating", true);
+            player._animator.SetBool("LevitatingLow", true);
             
             player.transform.position = standPoint.position;
             player.transform.rotation = standPoint.rotation;
@@ -82,7 +84,7 @@ namespace Helper
             yield return new WaitForSeconds(1f);
 
             Debug.Log("Level Bitti!");
-            // SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            SceneManager.LoadScene(nextLevelName);
         }
     }
 }
