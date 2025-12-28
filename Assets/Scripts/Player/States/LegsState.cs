@@ -12,11 +12,22 @@ namespace Player.States
             _characterController = context.GetComponent<CharacterController>();
         }
 
+        private void ActivateParticles()
+        {
+            Ctx.headBloodParticle.SetActive(true);
+            foreach (var particle in Ctx.armsBloodParticles)
+            {
+                particle.gameObject.SetActive(true);
+            }
+            Ctx.legsBloodParticle.SetActive(false);
+        }
+
         public override void EnterState()
         {
             CameraFadeManager.Instance.TransitionToCamera(Ctx.legsCam);
             Ctx._animator.SetBool("WalkingState", true);
             Ctx.legsMesh.GetComponent<SkinnedMeshRenderer>().material = Ctx.bodyDefaultMaterial;
+            ActivateParticles();
         }
 
         public override void UpdateState()

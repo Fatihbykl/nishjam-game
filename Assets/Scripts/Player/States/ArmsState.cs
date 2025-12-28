@@ -1,3 +1,4 @@
+using Enemy;
 using Helper;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -16,6 +17,18 @@ namespace Player.States
             Ctx._animator.SetBool("Shooting", true);
             Ctx.weaponModel.SetActive(true);
             Ctx.armsMesh.GetComponent<SkinnedMeshRenderer>().material = Ctx.bodyDefaultMaterial;
+            Ctx.crosshairCanvas.SetActive(true);
+            ActivateParticles();
+        }
+        
+        private void ActivateParticles()
+        {
+            Ctx.headBloodParticle.SetActive(true);
+            foreach (var particle in Ctx.armsBloodParticles)
+            {
+                particle.gameObject.SetActive(false);
+            }
+            Ctx.legsBloodParticle.SetActive(true);
         }
 
         public override void UpdateState()
@@ -28,6 +41,7 @@ namespace Player.States
             InputHandler.Actions.Player.Interact.started -= Shoot;
             Ctx._animator.SetBool("Shooting", false);
             Ctx.weaponModel.SetActive(false);
+            Ctx.crosshairCanvas.SetActive(false);
         }
         
         private void HandleCameraRotation()
@@ -52,15 +66,19 @@ namespace Player.States
 
         public void Fire()
         {
-            Debug.Log("Shoot");
-            RaycastHit hit;
-            if (Physics.Raycast(Ctx.armsCam.transform.position, Ctx.armsCam.transform.forward, out hit, 100f, Ctx.enemyLayer))
+            Ctx.revolverParticle.SetActive(true);
+
+            Debug.Log("Fiziksel Mermi Ateşlendi!");
+    
+            // Mermiyi namludan oluştur
+            GameObject bullet = GameObject.Instantiate(Ctx.bulletPrefab, Ctx.firePoint.position, Ctx.firePoint.rotation);
+    
+            // Mermiye hız ver (Rigidbody üzerinden)
+            Rigidbody rb = bullet.GetComponent<Rigidbody>();
+            if (rb != null)
             {
-                if (hit.collider.CompareTag("Enemy"))
-                {
-                    Debug.Log("Düşman Vuruldu (Stun)!");
-                    // Düşman scriptine stun sinyali gönder: hit.collider.GetComponent<EnemyAI>().Stun();
-                }
+                // Namlunun baktığı yöne (forward) fırlat
+                rb.linearVelocity = Ctx.armsCam.transform.forward * Ctx.bulletSpeed;
             }
         }
     }

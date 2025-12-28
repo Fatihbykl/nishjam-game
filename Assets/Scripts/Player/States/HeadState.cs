@@ -10,13 +10,24 @@ namespace Player.States
         {
             _ctx = context;
         }
+        
 
         public override void EnterState()
         {
             Debug.Log("HEAD MODE");
             CameraFadeManager.Instance.TransitionToCamera(Ctx.headCam);
             Ctx.headMesh.GetComponent<SkinnedMeshRenderer>().material = Ctx.bodyDefaultMaterial;
-            // reveal enemy here
+            ActivateParticles();
+        }
+        
+        private void ActivateParticles()
+        {
+            Ctx.headBloodParticle.SetActive(false);
+            foreach (var particle in Ctx.armsBloodParticles)
+            {
+                particle.gameObject.SetActive(true);
+            }
+            Ctx.legsBloodParticle.SetActive(true);
         }
 
         public override void UpdateState()

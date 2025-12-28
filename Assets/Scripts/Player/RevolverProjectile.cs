@@ -1,0 +1,55 @@
+using Enemy;
+using LevelProps;
+using UnityEngine;
+
+namespace Player
+{
+    public class RevolverProjectile : MonoBehaviour
+    {
+        public float lifeTime = 3f;
+        public GameObject impactEffect;
+
+        void Start()
+        {
+            Destroy(gameObject, lifeTime);
+        }
+
+        void OnTriggerEnter(Collider other)
+        {
+            if (other.CompareTag("Player") || other.CompareTag("Bullet")) return;
+            
+            if (other.gameObject.layer == LayerMask.NameToLayer("Default") || other.CompareTag("Wall")) 
+            {
+                DestroyProjectile();
+                return;
+            }
+            
+            ShootableSwitch shootableSwitch = other.GetComponent<ShootableSwitch>();
+
+            if (shootableSwitch != null)
+            {
+                shootableSwitch.GetHit();
+                DestroyProjectile();
+                return;
+            }
+            
+            SchrodingerEnemyAI enemy = other.GetComponentInParent<SchrodingerEnemyAI>();
+
+            if (enemy != null)
+            {
+                Debug.Log(other.gameObject.name);
+                enemy.GetStunned();
+                DestroyProjectile();
+            }
+        }
+
+        void DestroyProjectile()
+        {
+            if (impactEffect != null)
+            {
+                Instantiate(impactEffect, transform.position, Quaternion.identity);
+            }
+            Destroy(gameObject);
+        }
+    }
+}

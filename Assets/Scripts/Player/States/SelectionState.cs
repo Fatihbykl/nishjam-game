@@ -16,6 +16,16 @@ namespace Player.States
             CameraFadeManager.Instance.TransitionToCamera(Ctx.selectionCam, OnCameraTransitionFinished);
             Ctx._animator.SetBool("Levitating", true);
         }
+        
+        private void DeactivateParticles()
+        {
+            Ctx.headBloodParticle.SetActive(false);
+            foreach (var particle in Ctx.armsBloodParticles)
+            {
+                particle.gameObject.SetActive(false);
+            }
+            Ctx.legsBloodParticle.SetActive(false);
+        }
 
         public override void UpdateState()
         {
@@ -26,6 +36,7 @@ namespace Player.States
             Ctx.selectionCanvas.SetActive(true);
             SetDissolveMaterials();
             SetVisuals(true, true, true);
+            DeactivateParticles();
         }
         
         public void HighlightPart(BodyPartState part, bool isHovering)
@@ -68,9 +79,6 @@ namespace Player.States
             else
             {
                 rend.DODissolveOut(duration); 
-        
-                // Seçenek B: Hafif silik/hayalet kalsın istiyorsan (Ghost Mode)
-                // rend.DODissolve(0.85f, duration); 
             }
         }
 

@@ -27,12 +27,18 @@ namespace Player.States
         public LayerMask enemyLayer;
         [HideInInspector]
         public float xRotation = 0f;
+        
+        [Header("Weapon Settings")]
+        public GameObject bulletPrefab;
+        public Transform firePoint;
+        public float bulletSpeed = 20f;
 
         [Header("Components")]
         
         public GameObject weaponModel;
         public GameObject enemyRevealEffect;
         public GameObject selectionCanvas;
+        public GameObject crosshairCanvas;
 
         [Header("Settings")]
         public float runSpeed = 5f;
@@ -52,6 +58,12 @@ namespace Player.States
         public Material bodyDefaultMaterial;
         public Material bodyFresnelMaterial;
         public Material bodyDissolveMaterial;
+        
+        [Header("Particles")]
+        public GameObject[] armsBloodParticles;
+        public GameObject legsBloodParticle;
+        public GameObject headBloodParticle;
+        public GameObject revolverParticle;
 
         public void OnHoverHead(bool isHovering) 
         {
@@ -119,6 +131,11 @@ namespace Player.States
 
             _currentState = newState;
             _currentState.EnterState();
+        }
+        
+        void OnDrawGizmos()
+        {
+            Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * 100f, Color.red, 2f);
         }
     }
 }

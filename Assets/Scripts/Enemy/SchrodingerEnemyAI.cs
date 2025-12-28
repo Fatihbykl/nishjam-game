@@ -1,7 +1,7 @@
-using System.Collections;
-using Player.States;
+using Helper;
 using UnityEngine;
 using UnityEngine.AI;
+using Player.States; // Namespace'inin doğru olduğundan emin ol
 
 namespace Enemy
 {
@@ -14,34 +14,49 @@ namespace Enemy
         public float killDistance = 1.2f;
 
         [Header("Behavior Settings")]
-        public float predictionFactor = 1.5f; // Bacak modunda ne kadar ileriye koşsun?
-        public float zigzagFrequency = 2.0f;  // Zigzag ne kadar hızlı olsun?
-        public float zigzagAmplitude = 2.0f;  // Zigzag ne kadar geniş olsun?
-        public float hesitationTime = 1.5f;   // Kol moduna geçince kaç sn dursun?
-        public float stunDuration = 4.0f;     // Vurulunca kaç sn beklesin?
+        public float predictionFactor = 1.5f;
+        public float zigzagFrequency = 2.0f;
+        public float zigzagAmplitude = 2.0f;
+        public float hesitationTime = 1.5f;
+        public float stunDuration = 4.0f;
 
         [Header("References")]
         public Transform playerTransform;
-        public PlayerStateManager playerState; // Senin yazdığın State Manager
-        public MeshRenderer meshRenderer;      // Görünürlük kontrolü için
+        public PlayerStateManager playerState;
+        public SkinnedMeshRenderer[] meshRenderers;
+        public JumpscareManager jumpscareManager;
 
         private NavMeshAgent agent;
-        private bool isStunned = false;
-        private bool hasHesitated = false; // Kol modunda duraksama hakkını kullandı mı?
+        private Animator animator;
         private PlayerBaseState lastKnownState;
+
+        // --- TIMER DEĞİŞKENLERİ ---
+        private float currentStunTimer = 0f;      // Stun süresini tutar
+        private float currentHesitationTimer = 0f; // Tereddüt süresini tutar
+        
+        // State kontrolü için basit bool yerine timer kontrolü yapacağız
+        public bool IsStunned => currentStunTimer > 0f;
 
         void Start()
         {
             agent = GetComponent<NavMeshAgent>();
+            animator = GetComponent<Animator>();
             agent.speed = normalSpeed;
-            lastKnownState = playerState._currentState;
+            
+            // Başlangıçta state'i al
+            if(playerState != null) lastKnownState = playerState._currentState;
         }
 
         void Update()
         {
-            // 1. Önce Stun ve Mesafe Kontrolü
-            if (isStunned) return;
+            // 1. STUN MANTIĞI (En yüksek öncelik)
+            if (currentStunTimer > 0f)
+            {
+                HandleStunState();
+                return; // Stun yemişse başka hiçbir şey yapma
+            }
 
+            // 2. MESAFE VE ÖLÜM KONTROLÜ
             float distanceToPlayer = Vector3.Distance(transform.position, playerTransform.position);
             if (distanceToPlayer <= killDistance)
             {
@@ -49,26 +64,73 @@ namespace Enemy
                 return;
             }
 
-            // 2. Player State Değişimi Kontrolü
+            // 3. STATE DEĞİŞİMİ KONTROLÜ
             CheckStateChange();
 
-            // 3. State'e Göre Hareket Mantığı
+            // 4. HAREKET MANTIĞI
             HandleMovementLogic();
-        
-            // 4. Görünürlük Mantığı (Opsiyonel: Sadece Kafa modunda görünsün istersen)
+
+            // 5. GÖRÜNÜRLÜK
             HandleVisibility();
         }
 
+        // --- Stun Yönetimi ---
+        void HandleStunState()
+        {
+            // Süreyi azalt
+            currentStunTimer -= Time.deltaTime;
+
+            // Stun halindeyken hareket etmemeli
+            if (!agent.isStopped) 
+            {
+                agent.isStopped = true;
+                agent.velocity = Vector3.zero;
+                animator.SetBool("Walking", false);
+                animator.SetBool("Stunned", true);
+            }
+
+            // Süre bittiğinde
+            if (currentStunTimer <= 0f)
+            {
+                RecoverFromStun();
+            }
+        }
+
+        public void GetStunned()
+        {
+            Debug.Log("Düşman Vuruldu! Timer Resetlendi.");
+            
+            // SADECE SÜREYİ FULLÜYORUZ. Coroutine durdur/başlat derdi yok.
+            currentStunTimer = stunDuration;
+            
+            // Hesitation (Tereddüt) süresini sıfırla ki stun bitince hemen saldırsın
+            currentHesitationTimer = 0f; 
+
+            // Animasyonu anlık olarak tekrar tetiklemek istersen:
+            animator.Play("Stunned", 0, 0f); // Stun animasyonunu baştan oynat
+        }
+
+        void RecoverFromStun()
+        {
+            currentStunTimer = 0f;
+            agent.isStopped = false;
+            animator.SetBool("Stunned", false);
+        }
+
+        // --- State ve Hareket Yönetimi ---
         void CheckStateChange()
         {
-            // Eğer oyuncu mod değiştirdiyse
             if (playerState._currentState != lastKnownState)
             {
-                // Eğer yeni mod ARMS ise, tereddüt (hesitation) sıfırlanır
+                // Eğer yeni mod ARMS ise, tereddüt zamanlayıcısını kur
                 if (playerState._currentState is ArmsState)
                 {
-                    hasHesitated = false;
-                    StartCoroutine(HesitationRoutine());
+                    currentHesitationTimer = hesitationTime;
+                }
+                else
+                {
+                    // Başka moda geçtiysek tereddütü iptal et
+                    currentHesitationTimer = 0f;
                 }
 
                 lastKnownState = playerState._currentState;
@@ -77,107 +139,84 @@ namespace Enemy
 
         void HandleMovementLogic()
         {
-            // --- DURUM 1: BACAK MODU (Tahminci Koşu) ---
+            // NavMesh aktif değilse işlem yapma (Hata önleyici)
+            if (!agent.isOnNavMesh) return;
+
+            // A. BACAK MODU
             if (playerState._currentState is LegsState)
             {
-                agent.speed = normalSpeed;
                 agent.isStopped = false;
-
-                // Oyuncunun hız vektörünü al ve gelecekteki konumunu tahmin et
+                agent.speed = normalSpeed;
+                
                 Vector3 playerVelocity = playerState._controller.velocity;
                 Vector3 predictedPos = playerTransform.position + (playerVelocity * predictionFactor);
-            
                 agent.SetDestination(predictedPos);
+                
+                animator.SetBool("Walking", true);
             }
-        
-            // --- DURUM 2: KAFA MODU (Yavaş Zigzag) ---
+            // B. KAFA MODU
             else if (playerState._currentState is HeadState)
             {
-                agent.speed = slowSpeed;
                 agent.isStopped = false;
+                agent.speed = slowSpeed;
 
-                // Oyuncuya doğru giden vektör
                 Vector3 directionToPlayer = (playerTransform.position - transform.position).normalized;
-            
-                // Bu vektöre dik bir vektör bul (Sağ/Sol)
                 Vector3 sideVector = Vector3.Cross(directionToPlayer, Vector3.up);
-
-                // Sinüs dalgası ile sağa sola öteleme hesapla
                 float zigzagOffset = Mathf.Sin(Time.time * zigzagFrequency) * zigzagAmplitude;
-            
-                // Hedef noktayı sapmayla beraber belirle
                 Vector3 zigzagTarget = playerTransform.position + (sideVector * zigzagOffset);
-            
+                
                 agent.SetDestination(zigzagTarget);
+                animator.SetBool("Walking", true);
             }
-
-            // --- DURUM 3: KOL MODU (Duraksama ve Saldırı) ---
+            // C. KOL MODU (Hesitation Timer burada işliyor)
             else if (playerState._currentState is ArmsState)
             {
-                // Eğer hala tereddüt ediyorsa dur
-                if (!hasHesitated)
+                if (currentHesitationTimer > 0f)
                 {
+                    // Tereddüt süresi azalıyor
+                    currentHesitationTimer -= Time.deltaTime;
+                    
+                    // Duruyor
                     agent.isStopped = true;
                     agent.velocity = Vector3.zero;
+                    animator.SetBool("Walking", false);
                 }
                 else
                 {
-                    // Süre bitti, atış kaçtı! Şimdi normal hızda üstüne yürü
+                    // Süre bitti, saldır
                     agent.isStopped = false;
                     agent.speed = normalSpeed;
                     agent.SetDestination(playerTransform.position);
+                    animator.SetBool("Walking", true);
                 }
             }
         }
 
-        // Arms moduna geçince çalışan kısa bekleme süresi
-        IEnumerator HesitationRoutine()
-        {
-            // Duraksama başladı
-            yield return new WaitForSeconds(hesitationTime);
-        
-            // Süre bitti, artık saldırabilir
-            hasHesitated = true;
-        }
-
-        // Silahın tarafından çağırılacak fonksiyon
-        public void GetStunned()
-        {
-            if (isStunned) return;
-
-            Debug.Log("Düşman Vuruldu! Sersemledi.");
-            StopAllCoroutines(); // Hesitation varsa iptal et
-            StartCoroutine(StunRoutine());
-        }
-
-        IEnumerator StunRoutine()
-        {
-            isStunned = true;
-            agent.isStopped = true;
-            agent.velocity = Vector3.zero;
-
-            // Görsel efekt: Titreme veya donma animasyonu buraya
-            if(meshRenderer) meshRenderer.material.color = Color.red; // Örnek feedback
-
-            yield return new WaitForSeconds(stunDuration);
-
-            isStunned = false;
-            agent.isStopped = false;
-            if(meshRenderer) meshRenderer.material.color = Color.white; // Eski haline dön
-        }
-    
         void HandleVisibility()
         {
-            // Sadece Kafa modunda veya Stun yemişken görünür
-            bool shouldBeVisible = (playerState._currentState is HeadState) || isStunned;
-        
-            if(meshRenderer) meshRenderer.enabled = shouldBeVisible;
+            // Stun yemişse VEYA Kafa modundaysa görünür
+            bool shouldBeVisible = (playerState._currentState is HeadState) || IsStunned;
+            // İstersen testi kolaylaştırmak için bunu 'true' yapabilirsin
+            // bool shouldBeVisible = true; 
+
+            for (int i = 0; i < meshRenderers.Length; i++)
+            {
+                if(meshRenderers[i].enabled != shouldBeVisible)
+                    meshRenderers[i].enabled = shouldBeVisible;
+            }
         }
 
         void GameOver()
         {
-            Debug.Log("ÖLDÜN! Düşman yakaladı.");
-            // SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            Debug.Log("JUMPSCARE!");
+    
+            if (jumpscareManager != null)
+            {
+                jumpscareManager.TriggerJumpscare();
+        
+                this.enabled = false; 
+                agent.isStopped = true;
+            }
         }
     }
 }
