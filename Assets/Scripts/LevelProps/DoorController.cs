@@ -9,11 +9,6 @@ namespace LevelProps
     {
         [Header("References")]
         public ShootableSwitch[] requiredSwitches;
-        public Transform doorModel;
-
-        [Header("Animation Settings")]
-        public Vector3 openPositionOffset = new Vector3(0, 3, 0);
-        public float openSpeed = 1.0f;
     
         private bool isOpen = false;
 
