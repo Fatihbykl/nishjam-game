@@ -132,10 +132,5 @@ namespace Player.States
             _currentState = newState;
             _currentState.EnterState();
         }
-        
-        void OnDrawGizmos()
-        {
-            Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * 100f, Color.red, 2f);
-        }
     }
 }
