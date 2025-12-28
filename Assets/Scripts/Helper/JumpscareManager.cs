@@ -12,7 +12,6 @@ namespace Helper
 
         [Header("Audio")]
         public AudioSource audioSource;
-        public AudioClip screamSound;
 
         [Header("Settings")]
         public float scareDuration = 2.0f;
@@ -27,7 +26,7 @@ namespace Helper
         {
             jumpscarePanel.SetActive(true);
 
-            //audioSource.PlayOneShot(screamSound);
+            audioSource.Play();
 
             float timer = 0;
             Vector2 originalPos = faceImage.anchoredPosition;

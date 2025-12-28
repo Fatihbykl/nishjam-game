@@ -2268,56 +2268,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1555587081}
   m_CullTransparentMesh: 1
---- !u!1 &1623214730
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1623214732}
-  - component: {fileID: 1623214731}
-  m_Layer: 0
-  m_Name: JumpscareManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1623214731
+--- !u!114 &1623214731 stripped
 MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 461745302710410672, guid: 0a960b8e6daf16444bf5d5d02bf3caa5, type: 3}
+  m_PrefabInstance: {fileID: 9151918362603496458}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1623214730}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8d57eb94ba7b60b49949c29ed4d0b40d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Helper.JumpscareManager
-  jumpscarePanel: {fileID: 1319255968}
-  faceImage: {fileID: 805530146}
-  audioSource: {fileID: 0}
-  screamSound: {fileID: 0}
-  scareDuration: 2
-  shakeAmount: 50
---- !u!4 &1623214732
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1623214730}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.66612, y: 1.87081, z: -0.71372}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1668742631
 GameObject:
   m_ObjectHideFlags: 0
@@ -3724,6 +3685,71 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e1f35bb9e04b5d340958e868c8a236c3, type: 3}
+--- !u!1001 &9151918362603496458
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 268654464201686214, guid: 0a960b8e6daf16444bf5d5d02bf3caa5, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.66612
+      objectReference: {fileID: 0}
+    - target: {fileID: 268654464201686214, guid: 0a960b8e6daf16444bf5d5d02bf3caa5, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.87081
+      objectReference: {fileID: 0}
+    - target: {fileID: 268654464201686214, guid: 0a960b8e6daf16444bf5d5d02bf3caa5, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.71372
+      objectReference: {fileID: 0}
+    - target: {fileID: 268654464201686214, guid: 0a960b8e6daf16444bf5d5d02bf3caa5, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 268654464201686214, guid: 0a960b8e6daf16444bf5d5d02bf3caa5, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 268654464201686214, guid: 0a960b8e6daf16444bf5d5d02bf3caa5, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 268654464201686214, guid: 0a960b8e6daf16444bf5d5d02bf3caa5, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 268654464201686214, guid: 0a960b8e6daf16444bf5d5d02bf3caa5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 268654464201686214, guid: 0a960b8e6daf16444bf5d5d02bf3caa5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 268654464201686214, guid: 0a960b8e6daf16444bf5d5d02bf3caa5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 318094026479532830, guid: 0a960b8e6daf16444bf5d5d02bf3caa5, type: 3}
+      propertyPath: m_Name
+      value: JumpscareManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 461745302710410672, guid: 0a960b8e6daf16444bf5d5d02bf3caa5, type: 3}
+      propertyPath: faceImage
+      value: 
+      objectReference: {fileID: 805530146}
+    - target: {fileID: 461745302710410672, guid: 0a960b8e6daf16444bf5d5d02bf3caa5, type: 3}
+      propertyPath: jumpscarePanel
+      value: 
+      objectReference: {fileID: 1319255968}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 0a960b8e6daf16444bf5d5d02bf3caa5, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -3746,7 +3772,7 @@ SceneRoots:
   - {fileID: 1826941791}
   - {fileID: 219330246}
   - {fileID: 470786976}
-  - {fileID: 1623214732}
+  - {fileID: 9151918362603496458}
   - {fileID: 159449250}
   - {fileID: 1486253472}
   - {fileID: 1489002794}
