@@ -17,17 +17,19 @@ namespace Player
         void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("Player") || other.CompareTag("Bullet")) return;
-            
+
+            Debug.Log(other.gameObject.name);
             if (other.gameObject.layer == LayerMask.NameToLayer("Default") || other.CompareTag("Wall")) 
             {
                 DestroyProjectile();
                 return;
             }
-            
-            ShootableSwitch shootableSwitch = other.GetComponent<ShootableSwitch>();
+
+            ShootableSwitch shootableSwitch = other.gameObject.GetComponentInParent<ShootableSwitch>();
 
             if (shootableSwitch != null)
             {
+                Debug.Log("Switch Hit");
                 shootableSwitch.GetHit();
                 DestroyProjectile();
                 return;

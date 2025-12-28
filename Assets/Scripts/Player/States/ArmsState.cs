@@ -67,9 +67,7 @@ namespace Player.States
         public void Fire()
         {
             Ctx.revolverParticle.SetActive(true);
-
-            Debug.Log("Fiziksel Mermi Ateşlendi!");
-    
+            
             // Mermiyi namludan oluştur
             GameObject bullet = GameObject.Instantiate(Ctx.bulletPrefab, Ctx.firePoint.position, Ctx.firePoint.rotation);
     
