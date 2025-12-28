@@ -3313,6 +3313,11 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!82 &1882509410 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: -8014189971814655816, guid: e1f35bb9e04b5d340958e868c8a236c3, type: 3}
+  m_PrefabInstance: {fileID: 4791178594948995757}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1884422236
 GameObject:
   m_ObjectHideFlags: 0
@@ -3816,6 +3821,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1188444274540799048, guid: e1f35bb9e04b5d340958e868c8a236c3, type: 3}
+      propertyPath: stepSounds
+      value: 
+      objectReference: {fileID: 1882509410}
     - target: {fileID: 4389348520459311803, guid: e1f35bb9e04b5d340958e868c8a236c3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3

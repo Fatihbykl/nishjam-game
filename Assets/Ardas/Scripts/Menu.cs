@@ -15,7 +15,7 @@ public class Menu : MonoBehaviour
 	private bool isSFXOn = true;
 
 	public void StartGame() {
-		SceneManager.LoadScene("SampleScene");
+		SceneManager.LoadScene("Level_1");
 		AudioManager.instance.StartGameplayMusic();
 	}
 

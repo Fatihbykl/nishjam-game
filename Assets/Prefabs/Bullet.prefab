@@ -154,4 +154,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player.RevolverProjectile
   lifeTime: 3
-  impactEffect: {fileID: 743273905961176528, guid: c70a3acfe2ac91c42b47ba63c4dbb1bd, type: 3}
+  impactEffect: {fileID: 8393186749198606175, guid: df1282a3442ab1a4ca617ad011a74b25, type: 3}
