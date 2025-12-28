@@ -65,6 +65,9 @@ namespace Player.States
         public GameObject headBloodParticle;
         public GameObject revolverParticle;
 
+        [Header("Audio")]
+        public AudioSource revolver;
+
         public void OnHoverHead(bool isHovering) 
         {
             if(_currentState is SelectionState sel) sel.HighlightPart(BodyPartState.Head, isHovering);
@@ -87,7 +90,11 @@ namespace Player.States
 
         public void OnFire()
         {
-            if (_currentState is ArmsState arms) arms.Fire();
+            if (_currentState is ArmsState arms)
+            {
+                arms.Fire();
+                revolver.Play();
+            }
         }
 
         private void OnEnable()

@@ -44,7 +44,7 @@ AudioRandomContainer:
   m_PlaybackMode: 2
   m_TriggerMode: 1
   m_AutomaticTriggerMode: 1
-  m_LoopMode: 0
+  m_LoopMode: 1
   m_VolumeRandomizationEnabled: 1
   m_PitchRandomizationEnabled: 0
   m_AutomaticTriggerTimeRandomizationEnabled: 0

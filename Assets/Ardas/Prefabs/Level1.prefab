@@ -484,10 +484,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e36536b0fe1044a4b9aa3455a52930f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Helper.LevelEndSequence
+  enemy: {fileID: 0}
   endCam: {fileID: 0}
   standPoint: {fileID: 7453241389392427552}
   blackScreenPanel: {fileID: 0}
   bodyDissolveMaterial: {fileID: 2100000, guid: 476e15eb1c20a6c47bb99449aea164be, type: 2}
+  boxAnimator: {fileID: 0}
   dissolveSpeed: 2
   fadeSpeed: 1.5
 --- !u!1 &5914110736065121632
@@ -647,7 +649,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d6dd2ae9ad28784295b3094de28afb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LevelProps.ShootableSwitch
-  linkedDoor: {fileID: 3533854080691048323}
+  linkedDoor: {fileID: 5178158296455319135}
   switchRenderer: {fileID: 5632983179455671624}
   activeColor: {r: 0, g: 1, b: 0, a: 1}
   isActivated: 0
@@ -3609,58 +3611,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7987578192165962658, guid: ed62d4e640d76964f91092fed7a620f7, type: 3}
+      propertyPath: 'requiredSwitches.Array.data[0]'
+      value: 
+      objectReference: {fileID: 8103539620363305901}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 2692922334390573414, guid: ed62d4e640d76964f91092fed7a620f7, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 9116465593063036492}
-    - targetCorrespondingSourceObject: {fileID: 2692922334390573414, guid: ed62d4e640d76964f91092fed7a620f7, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 3533854080691048323}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ed62d4e640d76964f91092fed7a620f7, type: 3}
---- !u!1 &890086663417713819 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2692922334390573414, guid: ed62d4e640d76964f91092fed7a620f7, type: 3}
+--- !u!114 &5178158296455319135 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7987578192165962658, guid: ed62d4e640d76964f91092fed7a620f7, type: 3}
   m_PrefabInstance: {fileID: 2955794580458671613}
   m_PrefabAsset: {fileID: 0}
---- !u!95 &9116465593063036492
-Animator:
-  serializedVersion: 7
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 890086663417713819}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: d4e7239dab509354f922eaa36fcecd1f, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
---- !u!114 &3533854080691048323
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 890086663417713819}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d1a9fd83832381d49985c68fe7f3920f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LevelProps.DoorController
-  requiredSwitches:
-  - {fileID: 8103539620363305901}
 --- !u!4 &7374124721194948401 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5715966088899189452, guid: ed62d4e640d76964f91092fed7a620f7, type: 3}

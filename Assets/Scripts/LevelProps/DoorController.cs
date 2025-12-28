@@ -12,6 +12,8 @@ namespace LevelProps
     
         private bool isOpen = false;
 
+        public AudioSource effect;
+
         public void CheckSwitches()
         {
             if (isOpen) return;
@@ -30,7 +32,9 @@ namespace LevelProps
             isOpen = true;
 
             GetComponent<Animator>().SetTrigger("Open");
-            
+
+            effect.Play();
+
             // Kapı açılma sesi vb. buraya eklenebilir
         }
     }
