@@ -1,7 +1,4 @@
-using DG.Tweening;
 using UnityEngine;
-
-// DOTween kullandığın için animasyonu onunla yapıyoruz
 
 namespace LevelProps
 {
@@ -9,6 +6,7 @@ namespace LevelProps
     {
         [Header("References")]
         public ShootableSwitch[] requiredSwitches;
+        public PressurePlate[] requiredPlates;
     
         private bool isOpen = false;
 
@@ -22,6 +20,14 @@ namespace LevelProps
             {
                 if (!sw.isActivated) return;
             }
+            
+            if (requiredPlates != null)
+            {
+                foreach (var plate in requiredPlates)
+                {
+                    if (!plate.isCompleted) return;
+                }
+            }
 
             OpenDoor();
         }
@@ -34,8 +40,6 @@ namespace LevelProps
             GetComponent<Animator>().SetTrigger("Open");
 
             effect.Play();
-
-            // Kapı açılma sesi vb. buraya eklenebilir
         }
     }
 }

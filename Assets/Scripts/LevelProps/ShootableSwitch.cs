@@ -24,7 +24,6 @@ namespace LevelProps
             if (switchRenderer != null)
             {
                 switchRenderer.material.color = activeColor;
-                // Eğer "Emission" kullanıyorsan parlamasını da açabilirsin
                 switchRenderer.material.EnableKeyword("_EMISSION");
                 switchRenderer.material.SetColor("_EmissionColor", activeColor);
             }
