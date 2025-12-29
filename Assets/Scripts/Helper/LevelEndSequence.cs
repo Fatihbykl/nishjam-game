@@ -43,13 +43,14 @@ namespace Helper
             player.enabled = false; 
         
             player._controller.enabled = false; 
-            
+
             player._animator.SetBool("LevitatingLow", true);
             
             player.transform.position = standPoint.position;
             player.transform.rotation = standPoint.rotation;
             
             endCam.Priority = 100;
+            player.legsMesh.SetActive(false);
 
             yield return new WaitForSeconds(1.0f);
         

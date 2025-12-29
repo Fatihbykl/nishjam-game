@@ -18,8 +18,7 @@ namespace Player
         {
             if (other.CompareTag("Player") || other.CompareTag("Bullet")) return;
 
-            Debug.Log(other.gameObject.name);
-            if (other.gameObject.layer == LayerMask.NameToLayer("Default") || other.CompareTag("Wall")) 
+            if (other.gameObject.layer == LayerMask.NameToLayer("Default")) 
             {
                 DestroyProjectile();
                 return;

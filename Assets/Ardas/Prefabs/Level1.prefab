@@ -6129,6 +6129,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7836079642487705116}
     m_Modifications:
+    - target: {fileID: 1720599793625725822, guid: df7478aa5cf485c4f90e5a9e0bc131bc, type: 3}
+      propertyPath: nextLevelName
+      value: Level_2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1720599793625725822, guid: df7478aa5cf485c4f90e5a9e0bc131bc, type: 3}
+      propertyPath: bodyDissolveMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 576e78c0d23b0774fa568926b69bb5d2, type: 2}
     - target: {fileID: 2660107227121309719, guid: df7478aa5cf485c4f90e5a9e0bc131bc, type: 3}
       propertyPath: m_Name
       value: Box

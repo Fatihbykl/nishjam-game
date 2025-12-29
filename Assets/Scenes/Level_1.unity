@@ -149,8 +149,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Helper.CameraFadeManager
   fadeOverlay: {fileID: 1668742633}
-  fadeDuration: 0.3
-  stayBlackDuration: 0.25
+  fadeDuration: 0.15
+  stayBlackDuration: 0
   allCameras:
   - {fileID: 1803378258}
   - {fileID: 1153985162}
@@ -513,7 +513,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 60.000004
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -539,8 +539,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: -3.505, y: 6, z: -34.781}
+  m_LocalRotation: {x: 0.45758164, y: -7.006787e-16, z: 3.6058182e-16, w: 0.8891676}
+  m_LocalPosition: {x: -3.505, y: 8, z: -42.781}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2136,6 +2136,10 @@ PrefabInstance:
       value: Level1
       objectReference: {fileID: 0}
     - target: {fileID: 7214878631892133768, guid: 0f3641955466c2a4393639df17e0490e, type: 3}
+      propertyPath: enemy
+      value: 
+      objectReference: {fileID: 4791178594948995758}
+    - target: {fileID: 7214878631892133768, guid: 0f3641955466c2a4393639df17e0490e, type: 3}
       propertyPath: endCam
       value: 
       objectReference: {fileID: 1769233398}
@@ -2182,6 +2186,26 @@ PrefabInstance:
     - target: {fileID: 7836079642487705116, guid: 0f3641955466c2a4393639df17e0490e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8930878704305016948, guid: 0f3641955466c2a4393639df17e0490e, type: 3}
+      propertyPath: m_Size.y
+      value: 0.69380605
+      objectReference: {fileID: 0}
+    - target: {fileID: 8930878704305016948, guid: 0f3641955466c2a4393639df17e0490e, type: 3}
+      propertyPath: m_Size.z
+      value: 0.9862057
+      objectReference: {fileID: 0}
+    - target: {fileID: 8930878704305016948, guid: 0f3641955466c2a4393639df17e0490e, type: 3}
+      propertyPath: m_Center.x
+      value: -6.5918386e-13
+      objectReference: {fileID: 0}
+    - target: {fileID: 8930878704305016948, guid: 0f3641955466c2a4393639df17e0490e, type: 3}
+      propertyPath: m_Center.y
+      value: -0.15309697
+      objectReference: {fileID: 0}
+    - target: {fileID: 8930878704305016948, guid: 0f3641955466c2a4393639df17e0490e, type: 3}
+      propertyPath: m_Center.z
+      value: 0.006897896
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2572,7 +2596,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 60.000004
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -3673,6 +3697,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e1f35bb9e04b5d340958e868c8a236c3, type: 3}
+--- !u!1 &4791178594948995758 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4750841900431623442, guid: e1f35bb9e04b5d340958e868c8a236c3, type: 3}
+  m_PrefabInstance: {fileID: 4791178594948995757}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &9151918362603496458
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3733,6 +3762,10 @@ PrefabInstance:
       propertyPath: jumpscarePanel
       value: 
       objectReference: {fileID: 1319255968}
+    - target: {fileID: 6356394834081731296, guid: 0a960b8e6daf16444bf5d5d02bf3caa5, type: 3}
+      propertyPath: m_Volume
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

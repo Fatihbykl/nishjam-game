@@ -149,8 +149,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Helper.CameraFadeManager
   fadeOverlay: {fileID: 1668742633}
-  fadeDuration: 0.3
-  stayBlackDuration: 0.25
+  fadeDuration: 0.15
+  stayBlackDuration: 0
   allCameras:
   - {fileID: 1803378258}
   - {fileID: 1153985162}
@@ -195,6 +195,10 @@ PrefabInstance:
       propertyPath: blackScreenPanel
       value: 
       objectReference: {fileID: 1668742633}
+    - target: {fileID: 1720599793625725822, guid: df7478aa5cf485c4f90e5a9e0bc131bc, type: 3}
+      propertyPath: bodyDissolveMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 576e78c0d23b0774fa568926b69bb5d2, type: 2}
     - target: {fileID: 2660107227121309719, guid: df7478aa5cf485c4f90e5a9e0bc131bc, type: 3}
       propertyPath: m_Name
       value: Box
@@ -2580,6 +2584,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1623214732}
   - component: {fileID: 1623214731}
+  - component: {fileID: 1623214733}
   m_Layer: 0
   m_Name: JumpscareManager
   m_TagString: Untagged
@@ -2601,8 +2606,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Helper.JumpscareManager
   jumpscarePanel: {fileID: 1319255968}
   faceImage: {fileID: 805530146}
-  audioSource: {fileID: 0}
-  screamSound: {fileID: 0}
+  audioSource: {fileID: 1623214733}
   scareDuration: 2
   shakeAmount: 50
 --- !u!4 &1623214732
@@ -2620,6 +2624,103 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &1623214733
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1623214730}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 67b951d30a7810f45b1ae5229a736c43, type: 2}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 8300000, guid: 431b944443ffe3b4ca0b458e9e43544c, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 0.5
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &1668742631
 GameObject:
   m_ObjectHideFlags: 0
@@ -3863,6 +3964,10 @@ PrefabInstance:
       propertyPath: selectionCanvas
       value: 
       objectReference: {fileID: 1810444311}
+    - target: {fileID: 813635918038641068, guid: 9ca5198dfd9a8894691f3018d7b17aa3, type: 3}
+      propertyPath: EnemyTransform
+      value: 
+      objectReference: {fileID: 4791178594948995759}
     - target: {fileID: 2395088767488778360, guid: 9ca5198dfd9a8894691f3018d7b17aa3, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.5050001
@@ -3970,7 +4075,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4750841900431623442, guid: e1f35bb9e04b5d340958e868c8a236c3, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5161922643987199202, guid: e1f35bb9e04b5d340958e868c8a236c3, type: 3}
       propertyPath: m_Enabled
@@ -4008,6 +4113,11 @@ PrefabInstance:
 --- !u!1 &4791178594948995758 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4750841900431623442, guid: e1f35bb9e04b5d340958e868c8a236c3, type: 3}
+  m_PrefabInstance: {fileID: 4791178594948995757}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &4791178594948995759 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4389348520459311803, guid: e1f35bb9e04b5d340958e868c8a236c3, type: 3}
   m_PrefabInstance: {fileID: 4791178594948995757}
   m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
